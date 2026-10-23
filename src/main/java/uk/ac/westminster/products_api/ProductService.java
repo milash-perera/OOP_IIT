@@ -8,9 +8,13 @@ import java.util.Optional;
 
 @Service
 public class ProductService {
-
     private List<Product> products = new ArrayList<>();
     private Long nextId = 1L;
+
+    public ProductService() {
+        products.add(new DigitalProduct(nextId++, "Clean Code (E - Book)", 29.99, "/downloads/clean-code.pdf", 4.2));
+        products.add(new PhysicalProduct(nextId++, "6-inch Monitor", 249.99, 5.4, "7x7x8"));
+    }
 
     public List<Product> getAllProducts() {
         return products;
