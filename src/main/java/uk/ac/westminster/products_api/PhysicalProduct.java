@@ -4,7 +4,7 @@ import java.security.PublicKey;
 
 //A PhysicalProduct IS-A Product because it is a child class of Products
 
-public class PhysicalProduct extends Product{
+public class PhysicalProduct extends Product implements Discountable{
 
     private double weight;
     private String dimensions;
@@ -25,5 +25,23 @@ public class PhysicalProduct extends Product{
 
     public String getDimensions() {
         return dimensions;
+    }
+
+    @Override
+    public String getSummary(){
+        return "Physical: " + getName() + " | Weight: " + weight;
+    }
+
+    private double discountedPrice;
+
+    @Override
+    public void applyDiscount(double rate) {
+        double capped = Math.min(rate, 0.20);
+        discountedPrice =  getPrice() * (1 - capped);
+    }
+
+    @Override
+    public double getDiscountedPrice() {
+        return discountedPrice;
     }
 }
